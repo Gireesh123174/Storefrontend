@@ -1,0 +1,119 @@
+<div class="container-fluid billing-container">
+  <div class="row g-3">
+    <!-- Left Side: Category Buttons and Item List (8 parts) -->
+    <div class="col-md-8">
+      <!-- Category Buttons (Fixed) -->
+      <div class="category-buttons-container">
+        <div class="row flex-row flex-nowrap justify-content-center g-3 mb-4">
+          <div class="col-3" *ngFor="let category of categories">
+            <button class="category-button shadow p-0 w-100" (click)="filterItems(category.name)">
+              <div class="actual-image-area">
+                <i [class]="category.icon" style="font-size: 2.5rem; color: #028FA3;"></i>
+              </div>
+              <div class="item-name">{{ category.name }}</div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Item List (Scrollable) -->
+      <div class="items-list-container">
+        <div class="items-list">
+          <ng-container *ngFor="let item of itemsList">
+            <div class="item-card-view-container border shadow-sm" (click)="addToCart(item)">
+              <div class="image-area" [style.background-image]="getImageUrl(item.image)"></div>
+              <div class="item-details">
+                <div class="item-name">{{ item.name }}</div>
+                <div class="item-meta-data">
+                  <div class="sku-code">
+                    <div class="label">SKU Code</div>
+                    <div class="value">{{ item.skuCode }}</div>
+                  </div>
+                  <div class="hsn-code">
+                    <div class="label">HSN Code</div>
+                    <div class="value">{{ item.hsnCode }}</div>
+                  </div>
+                  <div class="btn">
+                    <button class="add-btn">Add</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Right Side: Cart (4 parts) -->
+    <div class="col-md-4">
+      <div class="cart-list-container w-100 h-100 border py-1">
+        <div class="cart-heading">
+          <div class="left-area">
+            <div class="icon">
+              <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
+              <span>{{ cartData?.cart?.length || 0 }}</span>
+            </div>
+            <div class="text">Your Items</div>
+          </div>
+          <div class="middle-area">
+            {{ cartData?.cart_id }}
+          </div>
+          <div class="right-area">
+            <button class="clear-all-btn" (click)="deleteAllCartItem()" [disabled]="!cartData?.cart?.length">
+              Clear All
+            </button>
+          </div>
+        </div>
+        <div class="cart-table-area w-100 px-1">
+          <table class="w-100">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Qty</th>
+                <th>UOM</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cartData?.cart; let i = index">
+                <td>{{ item.name }}</td>
+                <td>
+                  <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(i, item.quantity)" min="1" style="width: 60px; text-align: center;" />
+                </td>
+                <td>{{ item.uom }}</td>
+                <td>₹ {{ item.unitPrice }}</td>
+                <td>₹ {{ item.totalPrice }}</td>
+                <td>
+                  <button class="delete-btn" (click)="deleteCartItem(i)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="cart-footer mx-2 pt-3">
+          <div class="item-details">
+            <div class="total-quantity">
+              <div class="label">Total Qty:</div>
+              <div class="value">{{ cartDetails.totalQty }}</div>
+            </div>
+            <div class="total-items">
+              <div class="label">Total Items:</div>
+              <div class="value">{{ cartDetails.totalItems }}</div>
+            </div>
+            <div class="total-amount">
+              <div class="label">Total Amount:</div>
+              <div class="value">₹ {{ cartDetails.totalAmount }}</div>
+            </div>
+          </div>
+          <div class="button-area">
+            <button class="pay-btn" (click)="goToPayment()" [disabled]="!cartData?.cart?.length">
+              Pay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container-fluid home-container">
+  <header class="text-center mb-4">
+    <h1 class="display-4 text-primary">Store Management</h1>
+    <p class="lead text-muted">Manage your store with ease</p>
+  </header>
+  <div class="row flex-row flex-nowrap justify-content-center g-3">
+    <div class="col-12 col-md-3" *ngFor="let nav of navigationItems">
+      <button class="card-container shadow p-0 w-100" [routerLink]="nav.route">
+        <div class="actual-image-area">
+          <i [class]="nav.icon" style="font-size: 2.5rem; color: #028FA3;"></i>
+        </div>
+        <div class="item-name">{{ nav.name }}</div>
+      </button>
+    </div>
+  </div>
+</div>

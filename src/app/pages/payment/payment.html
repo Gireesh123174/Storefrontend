@@ -1,0 +1,13 @@
+<div class="container-fluid payment-container">
+  <h1 class="display-4 text-primary mb-4">Select Payment Method</h1>
+  <div class="row flex-row flex-nowrap justify-content-center g-3">
+    <div class="col-4" *ngFor="let method of paymentMethods">
+      <button class="payment-button shadow p-0 w-100" (click)="processPayment(method.name)">
+        <div class="actual-image-area">
+          <i [class]="method.icon" style="font-size: 3rem; color: #028FA3;"></i>
+        </div>
+        <div class="method-name">{{ method.name }}</div>
+      </button>
+    </div>
+  </div>
+</div>

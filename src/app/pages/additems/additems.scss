@@ -1,0 +1,30 @@
+$primary-color: #028FA3;
+
+.add-items-container {
+  padding: 2rem;
+
+  h1, h3 {
+    color: $primary-color;
+    font-weight: bold;
+  }
+
+  .form-control, .form-select {
+    border-color: $primary-color;
+    &:focus {
+      border-color:$primary-color;
+      box-shadow: 0 0 5px rgba($primary-color, 0.5);
+    }
+  }
+
+  .btn-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+      background-color:$primary-color;
+      border-color: $primary-color;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}

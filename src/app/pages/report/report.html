@@ -1,0 +1,27 @@
+<div class="container-fluid report-container">
+  <h1 class="display-4 text-primary mb-4">Sales Report</h1>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Cart ID</th>
+          <th>Date</th>
+          <th>Total Items</th>
+          <th>Total Amount</th>
+          <th>Payment Method</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.order_id }}</td>
+          <td>{{ order.cart_id }}</td>
+          <td>{{ order.order_date | date:'short' }}</td>
+          <td>{{ order.items.length }}</td>
+          <td>₹ {{ order.total_amount }}</td>
+          <td>{{ order.payment_method }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
